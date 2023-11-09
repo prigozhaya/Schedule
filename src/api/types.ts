@@ -1,0 +1,1 @@
+export type GroupData = { faculty: number; educationForm: number };
