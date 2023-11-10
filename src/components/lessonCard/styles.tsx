@@ -48,7 +48,25 @@ const StyledLessonTypeIndicator = styled.div<{ $lessonType?: string }>`
   position: relative;
   top: 0;
   left: 0;
-  background-color: ${({ $lessonType }) => ($lessonType === "лек" ? '#66f9a6' : '#d65172')};
+  ${props => {
+    switch (props.$lessonType) {
+      case "Дср":  
+      return `
+      background-color: #66f9d7;
+    `
+      case "Лек":  
+      return `
+      background-color: #6677f9;
+    `
+      case "Сем":  
+      return `
+      background-color: #c166f9;
+    `
+    default:  
+      return `
+      background-color: #d65172;
+    `
+  }}}
 `;
 
 export {

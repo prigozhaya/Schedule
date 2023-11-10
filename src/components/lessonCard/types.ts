@@ -1,11 +1,14 @@
 export interface Lesson {
-  id: string;
-  lesson: string;
-  lessonType: string;
+  idSchedule: number;
+  day: string;
+  dayNumber: number;
+  discipline: string;
+  disciplineType: string;
+  fioTeacher: string;
+  lesson: number;
   timeIn: string;
   timeOut: string;
   classroom: string;
-  lector: string;
 }
 
 export interface LessonCardProps {

@@ -10,7 +10,7 @@ export const StyledScheduleForm = styled(Form)`
 `;
 
 export const StyledPageContainer = styled.div`
-  padding-top: 180px;
+  padding-top: 30px;
   max-width: 1200px;
   margin: 0 auto;
 `;

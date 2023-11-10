@@ -5,7 +5,6 @@ export const StyledHeader = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: fixed;
   top: 0;
   left: 0;
 `;
@@ -29,7 +28,6 @@ export const StyledNavigation = styled.div`
   height: 60px;
   background: #FFF;
   display: flex;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.20);
 `;
 
 export const StyledNavBarContainer = styled.div`
@@ -38,6 +36,7 @@ export const StyledNavBarContainer = styled.div`
   margin: 0 auto;
   position: relative;
 `;
+
 
 export const StyledNavBarLinks = styled.a`
 color: #000;
@@ -53,8 +52,17 @@ padding-left: 180px;
     padding-top: 10px;
 `;
 
+export const StyledNavBarMenu = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  margin-left: 30px;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.20);
+`;
+
 export const StyledNavBarLogo = styled.img`
 position: absolute;
 bottom: -30px;
+z-index: 99;
 `;
 
