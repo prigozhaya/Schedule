@@ -1,7 +1,6 @@
-import { Form } from "formik";
 import styled from "styled-components";
 
-export const StyledScheduleForm = styled(Form)`
+export const StyledScheduleForm = styled.div`
   display: flex;
   position: relative;
   flex-wrap: wrap;
@@ -24,7 +23,7 @@ margin: 0 10px;
 `;
 
 export const StyledGroupsWrapper = styled.div`
-display: flex;
+display: none;
 flex-wrap: wrap;
 gap: 30px;
 `;

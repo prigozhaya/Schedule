@@ -60,7 +60,7 @@ const StyledLessonTypeIndicator = styled.div<{ $lessonType?: string }>`
     `
       case "Сем":  
       return `
-      background-color: #c166f9;
+      background-color: #814fbe;
     `
     default:  
       return `
