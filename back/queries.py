@@ -2,6 +2,7 @@ GET_GROUP_QUERY = f"""
     SELECT Name, IdGroup
     FROM Groups
     WHERE IdF = {{0}} AND Year > YEAR(GETDATE())-5 AND Name != 'арх' AND Name != 'а/о' AND IdFormaTime = {{1}}
+    ORDER BY Name 
 """
 
 EXTRACT_DATA_QUERY = f"""
@@ -20,7 +21,7 @@ EXTRACT_DATA_QUERY = f"""
 """
 
 GET_TEACHERS_NAME_QUERY = f"""
-    SELECT DISTINCT (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO) AS FIO_teacher, IdTeacher 
+    SELECT DISTINCT (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO) AS FIO_teacher, dbo.e_Teacher.IdTeacher 
     FROM sch.ScheduleV
     JOIN dbo.e_Teacher ON sch.ScheduleV.IdTeacher = dbo.e_Teacher.IdTeacher
     WHERE (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO) IS NOT NULL
