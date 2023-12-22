@@ -86,7 +86,7 @@ def getTeacherNames():
 @app.route('/teachers', methods=["GET"])
 def getTeachersSchedule():
     currentMonday, currentSunday = setWeek(request)
-    FIO_teacher = request.args.get("FIO_teacher")
+    FIO_teacher = request.args.get("teacherId")
     try:
         connectionString = f'DRIVER={{SQL Server}};' \
                            f'SERVER={constants.SERVER};' \

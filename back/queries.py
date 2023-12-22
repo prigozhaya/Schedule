@@ -20,7 +20,7 @@ EXTRACT_DATA_QUERY = f"""
 """
 
 GET_TEACHERS_NAME_QUERY = f"""
-    SELECT DISTINCT (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO) AS FIO_teacher
+    SELECT DISTINCT (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO) AS FIO_teacher, IdTeacher 
     FROM sch.ScheduleV
     JOIN dbo.e_Teacher ON sch.ScheduleV.IdTeacher = dbo.e_Teacher.IdTeacher
     WHERE (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO) IS NOT NULL
@@ -38,7 +38,7 @@ EXTRACT_DATA_FOR_TEACHERS_QUERY = f"""
     JOIN sch.LectureHallV ON sch.ScheduleV.IdLectureHall = sch.LectureHallV.IdLectureHall
     JOIN sch.ScheduleDaysOptionV ON sch.ScheduleV.IdScheduleDaysOption = sch.ScheduleDaysOptionV.IdScheduleDaysOption
     JOIN sch.SubjectTime ON sch.ScheduleV.IdScheduleTimeOption = sch.SubjectTime.IdScheduleTimeOption
-    WHERE DateIn <= '{{0}}' AND DateOut >= '{{1}}' AND (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO) = '{{2}}'
-    GROUP BY (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO), sch.ScheduleDaysOptionV.Name2, sch.ScheduleV.IdScheduleDaysOption, IdSchedule, DateIn, DateOut, sch.ScheduleV.IdScheduleTimeOption, sch.SubjectTime.TimeIn, sch.SubjectTime.TimeOut, dbo.Lesson.ShortName, dbo.ScPlanLessonType_V.ShortName, sch.LectureHallV.Number, Groups.Name, sch.ScheduleV.IdGroup, Groups.IdF
-    ORDER BY (NamePost + ' ' + NameF + ' ' + NameI + ' ' + NameO), DayNumber, Lesson 
+    WHERE DateIn <= '{{0}}' AND DateOut >= '{{1}}' AND IdTeacher = '{{2}}'
+    GROUP BY IdTeacher, sch.ScheduleDaysOptionV.Name2, sch.ScheduleV.IdScheduleDaysOption, IdSchedule, DateIn, DateOut, sch.ScheduleV.IdScheduleTimeOption, sch.SubjectTime.TimeIn, sch.SubjectTime.TimeOut, dbo.Lesson.ShortName, dbo.ScPlanLessonType_V.ShortName, sch.LectureHallV.Number, Groups.Name, sch.ScheduleV.IdGroup, Groups.IdF
+    ORDER BY IdTeacher, DayNumber, Lesson 
 """
