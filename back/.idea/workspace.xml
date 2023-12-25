@@ -5,23 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46ce92bb-83f1-43a4-9ede-032ee17aca0d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Ueeee.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/back.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/back.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/api/getGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/api/getGroups.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/api/getSchedule.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/api/getSchedule.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/components/lessonCard/styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/lessonCard/styles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/components/scheduleSection/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/scheduleSection/styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/components/selects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/selects/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/components/selects/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/selects/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/helpers/prepareGroupsData.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/helpers/prepareScheduleData.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/helpers/shedule.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/styles.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/pages/studentsSchedule/types/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "develop",
-    "last_opened_file_path": "D:/работа/Shedule_MSLU/Schedule/back"
+    "last_opened_file_path": "C:/Users/User/Desktop/uuu/Schedule/back"
   }
 }]]></component>
   <component name="RunManager">
@@ -63,9 +52,10 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\User\PycharmProjects\Diploma\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.9 (Diploma)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />

@@ -39,5 +39,13 @@ function SelectGroup({groupsData}: SelectGroupProps) {
   );
 }
 
+function SelectWeekType() {
+  return (    
+    <select name="weekType" id="weekType">
+  <option value="currentWeek">Текущая неделя</option>
+  <option value="nextWeek">Следующая неделя</option>
+    </select>
+  );
+}
 
-export{SelectFaculty, SelectEducationForm, SelectGroup}
+export{SelectFaculty, SelectEducationForm, SelectWeekType, SelectGroup}

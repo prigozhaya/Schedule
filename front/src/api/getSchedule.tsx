@@ -4,8 +4,9 @@ const API_LINK = 'http://localhost:5000';
 
 export async function getSchedule(
     idGroups: string,
+    weekType: string,
     setScheduleData: (value: ScheduleData[][]) => void){
-  const apiLink = `${API_LINK}?idgroup=${idGroups}`;
+  const apiLink = `${API_LINK}?idgroup=${idGroups}&weekType=${weekType}`;
   const apiUrl = await fetch(apiLink);
   const responseData = await apiUrl.json();
   const result = responseData.map((element: RespondeScheduleData) => {

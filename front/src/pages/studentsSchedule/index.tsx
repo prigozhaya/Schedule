@@ -8,6 +8,7 @@ import {
 import {
     SelectEducationForm,
     SelectFaculty,
+    SelectWeekType,
     SelectGroup,
 } from '../../components/selects';
 import { StyledBtn } from '../../components/button';
@@ -27,8 +28,10 @@ export default function StudentsSchedule() {
         const educationForm = document.getElementById(
             'educationForm'
         ) as HTMLSelectElement;
+        const weekType = document.getElementById('weekType') as HTMLSelectElement;
         getGroups(faculty.value, educationForm.value, setGroupsData);
         displayGroupsBlock()
+        getSchedule('selectedGroupId', weekType.value, setScheduleData);  
     }
 
     return (
@@ -36,6 +39,7 @@ export default function StudentsSchedule() {
             <StyledScheduleForm>
             <SelectFaculty />
             <SelectEducationForm />
+            <SelectWeekType />
             <StyledBtn name="selectedgroup" onClick={chooseGroup}>
                 Выбрать группу
             </StyledBtn>
@@ -46,7 +50,7 @@ export default function StudentsSchedule() {
                 }}
                 onSubmit={(values) => {
                     const idGroups = values.group
-                    getSchedule(idGroups, setScheduleData)
+                    
                     hideGroupsBlock()
                 }}
             >
