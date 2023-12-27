@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.header`
   width: 100%;
@@ -22,6 +23,11 @@ export const StyledWraperTitle = styled.h2`
     position: absolute;
     left: 210px;
     margin: 31px 0;
+
+@media screen and (max-width: 680px) {
+left: 170px;
+  }
+    
 `;
 
 export const StyledNavigation = styled.div`
@@ -38,18 +44,22 @@ export const StyledNavBarContainer = styled.div`
 `;
 
 
-export const StyledNavBarLinks = styled.a`
+export const StyledNavBarLinks = styled(Link)`
 color: #000;
 text-decoration: none;
 font-size: 18px;
 `;
 
 export const StyledNavBarLinksContainer = styled.div`
-width: 480px;
+width: 240px;
 display: flex;
 justify-content: space-around;
 padding-left: 180px;
     padding-top: 10px;
+
+    @media screen and (max-width: 680px) {
+padding-left: 150px;
+  }
 `;
 
 export const StyledNavBarMenu = styled.div`
@@ -64,5 +74,9 @@ export const StyledNavBarLogo = styled.img`
 position: absolute;
 bottom: -30px;
 z-index: 99;
+
+@media screen and (max-width: 680px) {
+width: 150px;
+  }
 `;
 

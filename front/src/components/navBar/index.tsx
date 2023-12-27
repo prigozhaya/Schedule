@@ -11,6 +11,7 @@ import {
 } from './styles';
 
 export default function NavBar() {
+
     return (
         <StyledHeader>
             <StyledWraperHeader>
@@ -23,11 +24,11 @@ export default function NavBar() {
                 <StyledNavigation>
                     <StyledNavBarMenu>
                         <StyledNavBarLinksContainer>
-                            <StyledNavBarLinks>
-                                Расписание групп
+                            <StyledNavBarLinks to={"/"}>
+                                Группы
                             </StyledNavBarLinks>
-                            <StyledNavBarLinks>
-                                Расписание преподавателей
+                            <StyledNavBarLinks to={"/teacherSchedule"}>
+                                Преподаватели
                             </StyledNavBarLinks>
                         </StyledNavBarLinksContainer>
                     </StyledNavBarMenu>

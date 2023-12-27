@@ -1,5 +1,9 @@
-import { ScheduleData } from "../../pages/studentsSchedule/types/types";
+import { StudentsScheduleData, TeachersScheduleData } from "../../pages/studentsSchedule/types/types";
 
-export interface ScheduleSectionProps {
-  weekDaysLesson: ScheduleData[];
+export interface StudentsScheduleSectionProps {
+  weekDaysLesson: StudentsScheduleData[];
+}
+
+export interface TeachersScheduleSectionProps {
+  weekDaysLesson: TeachersScheduleData[];
 }

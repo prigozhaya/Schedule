@@ -13,13 +13,6 @@ global faculcyId, educationForm, groupId
 app = Flask(__name__)
 CORS(app)
 
-# # Получаем от клиента Факультет и Форму обучения, которые потребуются для извлечения данных из SMSS
-# @app.route('/recieveGroups', methods=["GET"]) # УЭЭЭЭ изменить POST на GET
-# def getFaculcyId():
-#     faculcyId = request.args.get("facultyId")           # УЭЭЭЭ изменить json на args
-#     educationForm = request.args.get("educationForm")
-#
-#     return jsonify({'message': 'Получен id факультета'}), 200
 
 def data_from_db_to_client(cursor, query, *args):
     cursor.execute(query.format(*args))
@@ -29,7 +22,6 @@ def data_from_db_to_client(cursor, query, *args):
     for result in rv:
         json_data.append(dict(zip(row_headers, result)))
     return json.dumps(json_data, ensure_ascii=False, default=str)
-
 
 
 #                                                    http://127.0.0.1:5000/buttonClicked?facultyId=222&educationForm=1      # УЭЭЭЭ
@@ -81,12 +73,12 @@ def getTeacherNames():
         conn.close()
         print("Connection closed")
 
-#                                                    http://127.0.0.1:5000/teachers?FIO_teacher={"доц. Бартош Наталья Николаевна"}      # УЭЭЭЭ
+#                                                    http://127.0.0.1:5000/teachers?teacherId=1313&weekType=nextWeek      # УЭЭЭЭ
 # 2023-12-18 2023-12-24
 @app.route('/teachers', methods=["GET"])
 def getTeachersSchedule():
     currentMonday, currentSunday = setWeek(request)
-    FIO_teacher = request.args.get("teacherId")
+    teacherId = request.args.get("teacherId")
     try:
         connectionString = f'DRIVER={{SQL Server}};' \
                            f'SERVER={constants.SERVER};' \
@@ -96,8 +88,7 @@ def getTeachersSchedule():
         print('Succesfull connected')
         cursor = conn.cursor()
         cursor.execute(f"USE {constants.DATABASE}")
-        # FIO_teacher = 'доц. Бартош Наталья Николаевна' #!
-        result = data_from_db_to_client(cursor, queries.EXTRACT_DATA_FOR_TEACHERS_QUERY, currentMonday, currentSunday, FIO_teacher)
+        result = data_from_db_to_client(cursor, queries.EXTRACT_DATA_FOR_TEACHERS_QUERY, currentMonday, currentSunday, teacherId)
         return json.dumps(result)
     except pyodbc.Error as error:
         print(f'An error {error} occured')
@@ -118,17 +109,18 @@ def setWeek(request):
         additionalTime = timedelta(days=7)
     now = datetime.now().date()
     currentMonday = now - timedelta(days=now.weekday()) + additionalTime
-    currentSunday = (currentMonday + timedelta(days=5) + additionalTime).strftime("%Y-%m-%d")
+    currentSunday = (currentMonday + timedelta(days=5)).strftime("%Y-%m-%d")
     currentMonday = currentMonday.strftime("%Y-%m-%d")
     return currentMonday, currentSunday
 
 
-#                                           http://127.0.0.1:5000/?groupId=224003249    # УЭЭЭЭ
+#                                           http://localhost:5000/?groupId=224003485&weekType=nextWeek    # УЭЭЭЭ
 @app.route('/')
 def main():
     # faculcyId, formaTimeId, dayBegin, dayEnd, groupId = 222, 1, 23, 28, 224003249 #!
-    currentMonday, currentSunday = setWeek(request)
     groupId = request.args.get("groupId")
+    currentMonday, currentSunday = setWeek(request)
+    print(currentMonday, currentSunday)
 
     connectionString = f'DRIVER={{SQL Server}};' \
                        f'SERVER={constants.SERVER};' \

@@ -18,7 +18,7 @@ margin: 5px 0;
 text-align: start;
 `;
 
-const StyledLessonSectionLector = styled.div`
+const StyledLessonSectionClassroom = styled.div`
 flex-grow: 1;
 margin: 5px 10px;
 display: flex;
@@ -38,8 +38,8 @@ const StyledLessoninfo = styled.p`
 margin: 0;
 color: #4e4e4e;
 font-size: 14px;
-max-width: 100px;
-
+max-width: 200px;
+min-width: 40px;
 `;
 
 const StyledLessonTypeIndicator = styled.div<{ $lessonType?: string }>`
@@ -50,21 +50,18 @@ const StyledLessonTypeIndicator = styled.div<{ $lessonType?: string }>`
   left: 0;
   ${props => {
     switch (props.$lessonType) {
-      case "Дср":  
-      return `
-      background-color: #66f9d7;
-    `
+      
       case "Лек":  
       return `
-      background-color: #6677f9;
+      background-color: #66f995;
     `
       case "Сем":  
       return `
-      background-color: #814fbe;
+      background-color: #ffd950;
     `
     default:  
       return `
-      background-color: #d65172;
+      background-color: #ed6363;
     `
   }}}
 `;
@@ -73,7 +70,7 @@ export {
   StyledCard,
   StyledLessonTypeIndicator,
   StyledLessonSection,
-  StyledLessonSectionLector,
+  StyledLessonSectionClassroom,
   StyledLessonTimeIn,
   StyledLessoninfo,
   StyledLessonName,

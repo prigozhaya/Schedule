@@ -1,4 +1,3 @@
-import { Formik } from 'formik';
 import {
     StyledScheduleForm,
     StyledPageContainer,
@@ -12,70 +11,92 @@ import {
     SelectGroup,
 } from '../../components/selects';
 import { StyledBtn } from '../../components/button';
-import { GroupsData, ScheduleData } from './types/types';
-import ScheduleSection from '../../components/scheduleSection';
-import { useState } from 'react';
+import { GroupsData, StudentsScheduleData } from './types/types';
+import { useContext, useState } from 'react';
 import { getGroups } from '../../api/getGroups';
-import { getSchedule } from '../../api/getSchedule';
+import { getStudentsSchedule } from '../../api/getSchedule';
 import { displayGroupsBlock, hideGroupsBlock } from './helpers/hideGroups';
+import EmptyResponseIcon from '../../components/emptyResponse';
+import LessonIndicator from '../../components/lessonIndicator';
+import { ScheduleContext } from '../../App';
+import StudentsScheduleSection from '../../components/scheduleSection/StudentScheduleSection';
 
 export default function StudentsSchedule() {
+    const { StudentsScheduleData, setStudentsScheduleData, selectedGroupSchedule, setSelectedGroupSchedule } = useContext(ScheduleContext);
+
     const [groupsData, setGroupsData] = useState<GroupsData[]>([]);
-    const [scheduleData, setScheduleData] = useState<ScheduleData[][]>([]);
+    const [faculty, setFaculty] = useState<string>('');
+    const [educationForm, setEducationForm] = useState<string>('');
+    const [weekType, setWeekType] = useState<string>('');
 
     function chooseGroup() {
         const faculty = document.getElementById('faculty') as HTMLSelectElement;
         const educationForm = document.getElementById(
             'educationForm'
         ) as HTMLSelectElement;
-        const weekType = document.getElementById('weekType') as HTMLSelectElement;
+        const weekType = document.getElementById(
+            'weekType'
+        ) as HTMLSelectElement;
         getGroups(faculty.value, educationForm.value, setGroupsData);
-        displayGroupsBlock()
-        getSchedule('selectedGroupId', weekType.value, setScheduleData);  
+
+        displayGroupsBlock();
+        setFaculty(faculty.options[faculty.selectedIndex].text);
+        setWeekType(weekType.value);
+        setEducationForm(
+            educationForm.options[educationForm.selectedIndex].text
+        );
+        getGroups(faculty.value, educationForm.value, setGroupsData);
+        displayGroupsBlock();
+    }
+
+    function handleGetSchadule() {
+        const groupId = document.getElementById('group') as HTMLSelectElement;
+        const week = weekType === "currentWeek" ? "текущую неделю" : "следующую неделю";
+        getStudentsSchedule(groupId.value, weekType, setStudentsScheduleData);
+        setSelectedGroupSchedule(
+            `Расписание для группы ${
+                groupId.options[groupId.selectedIndex].text
+            } ${faculty} ${educationForm} на ${week}:`
+        );
+        hideGroupsBlock();
     }
 
     return (
         <StyledPageContainer>
             <StyledScheduleForm>
-            <SelectFaculty />
-            <SelectEducationForm />
-            <SelectWeekType />
-            <StyledBtn name="selectedgroup" onClick={chooseGroup}>
-                Выбрать группу
-            </StyledBtn>
+                <SelectFaculty />
+                <SelectEducationForm />
+                <SelectWeekType />
+                <StyledBtn name="selectedgroup" onClick={chooseGroup}>
+                    Выбрать группу
+                </StyledBtn>
 
-            <Formik
-                initialValues={{
-                    group: '1',
-                }}
-                onSubmit={(values) => {
-                    const idGroups = values.group
-                    
-                    hideGroupsBlock()
-                }}
-            >
-                {() => (
-                    
-                        <StyledGroupsWrapper id='groupsWrapper'>
-                            <SelectGroup groupsData={groupsData} />
-                            <StyledBtn $primary type="submit">
-                                Расписание
-                            </StyledBtn>
-                        </StyledGroupsWrapper>
-                )}
-            </Formik>
+                <StyledGroupsWrapper id="groupsWrapper">
+                    <SelectGroup groupsData={groupsData} />
+                    <StyledBtn $primary onClick={handleGetSchadule}>
+                        Расписание
+                    </StyledBtn>
+                </StyledGroupsWrapper>
             </StyledScheduleForm>
-
-            <StyledShaduleContainer>
-                {scheduleData.map(
-                    (weekDaysLesson: ScheduleData[], index: number) => (
-                        <ScheduleSection
-                            weekDaysLesson={weekDaysLesson}
-                            key={index}
-                        />
-                    )
-                )}
-            </StyledShaduleContainer>
+            <LessonIndicator />
+            <p>{selectedGroupSchedule}</p>
+            {StudentsScheduleData.flat().length > 0 ? (
+                <StyledShaduleContainer>
+                    {StudentsScheduleData.map(
+                        (
+                            weekDaysLesson: StudentsScheduleData[],
+                            index: number
+                        ) => (
+                            <StudentsScheduleSection
+                                weekDaysLesson={weekDaysLesson}
+                                key={index}
+                            />
+                        )
+                    )}
+                </StyledShaduleContainer>
+            ) : (
+                <EmptyResponseIcon />
+            )}
         </StyledPageContainer>
     );
 }

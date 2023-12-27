@@ -1,46 +1,65 @@
-import {
-  SelectTeacher,
-} from '../../components/selects';
+import { SelectTeacher, SelectWeekType } from '../../components/selects';
 import { StyledBtn } from '../../components/button';
-import ScheduleSection from '../../components/scheduleSection';
-import { useState } from 'react';
-import { getSchedule } from '../../api/getSchedule';
+import { useContext, useEffect, useState } from 'react';
+import { getTeachersSchedule } from '../../api/getSchedule';
 import EmptyResponseIcon from '../../components/emptyResponse';
 import LessonIndicator from '../../components/lessonIndicator';
-import { StyledPageContainer, StyledScheduleForm, StyledGroupsWrapper, StyledShaduleContainer } from '../styles';
-import { ScheduleData, TeachersData } from '../studentsSchedule/types/types';
+import {
+    StyledPageContainer,
+    StyledScheduleForm,
+    StyledShaduleContainer,
+} from '../styles';
+import { TeachersScheduleData, TeachersData } from '../studentsSchedule/types/types';
+import { getTeachers } from '../../api/getTeachers';
+import { ScheduleContext } from '../../App';
+import TeachersScheduleSection from '../../components/scheduleSection/TeacherScheduleSection';
 
 export default function TeacherSchedule() {
-  const [teachersData, setteachersData] = useState<TeachersData[]>([]);
-  const [scheduleData, setScheduleData] = useState<ScheduleData[][]>([]);
+    const { TeachersScheduleData, setTeachersScheduleData, selectedTeacherSchedule, setSelectedTeacherSchedule } = useContext(ScheduleContext);
+    const [teachersData, setTeachersData] = useState<TeachersData[]>([]);
 
+    useEffect(() => {
+        getTeachers(setTeachersData);
+    }, []);
 
-  function handlChangeTeacher() {
-      // const groupId = document.getElementById('group') as HTMLSelectElement;
-      // getSchedule(groupId.value, setScheduleData)
-  }
+    function handleGetTeacherSchadule() {
+        const weekType = document.getElementById(
+            'weekType'
+        ) as HTMLSelectElement;
+        const teacherId = document.getElementById(
+            'teacher'
+        ) as HTMLSelectElement;
+        const week = weekType.value === "currentWeek" ? "текущую неделю" : "следующую неделю";
+        setSelectedTeacherSchedule(`Для ${teacherId.options[teacherId.selectedIndex].text} на ${week}: `)
+        getTeachersSchedule(teacherId.value, weekType.value, setTeachersScheduleData);
+    }
 
-  return (
-      <StyledPageContainer>
-          <StyledScheduleForm>
-          <SelectTeacher teachersData={teachersData}  />
-          </StyledScheduleForm>
+    return (
+        <StyledPageContainer>
+            <StyledScheduleForm>
+                <SelectTeacher teachersData={teachersData} />
+                <SelectWeekType />
+                <StyledBtn $primary onClick={handleGetTeacherSchadule}>
+                    Расписание
+                </StyledBtn>
+            </StyledScheduleForm>
+            <LessonIndicator />
 
-          <LessonIndicator/>
-
-{scheduleData.flat().length > 0 ? 
-          <StyledShaduleContainer>
-              {scheduleData.map(
-                  (weekDaysLesson: ScheduleData[], index: number) => (
-                      <ScheduleSection
-                          weekDaysLesson={weekDaysLesson}
-                          key={index}
-                      />
-                  )
-              )}
-          </StyledShaduleContainer> :
-          <EmptyResponseIcon/>
-}
-      </StyledPageContainer>
-  );
+            <p>{selectedTeacherSchedule}</p>
+            {TeachersScheduleData.flat().length > 0 ? (
+                <StyledShaduleContainer>
+                    {TeachersScheduleData.map(
+                        (weekDaysLesson: TeachersScheduleData[], index: number) => (
+                            <TeachersScheduleSection
+                                weekDaysLesson={weekDaysLesson}
+                                key={index}
+                            />
+                        )
+                    )}
+                </StyledShaduleContainer>
+            ) : (
+                <EmptyResponseIcon />
+            )}
+        </StyledPageContainer>
+    );
 }

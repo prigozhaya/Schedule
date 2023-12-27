@@ -15,7 +15,7 @@ export const StyledPageContainer = styled.div`
 `;
 
 export const StyledShaduleContainer = styled.div`
-padding-top: 10px;
+padding: 10px 0 15px 0;
 display: flex;
 flex-direction: column;
 gap: 15px;

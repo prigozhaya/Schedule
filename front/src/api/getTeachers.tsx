@@ -1,25 +1,21 @@
 import {
-  GroupsData,
-  RespondeGroupsData,
+  RespondeTeachersData,
+  TeachersData,
 } from '../pages/studentsSchedule/types/types';
 
-const API_LINK = 'http://localhost:5000/buttonClicked?';
+const API_LINK = 'http://localhost:5000/getTeacherNames';
 
 export async function getTeachers(
-  facultyId: string,
-  educationForm: string,
-  setGroupsData: (value: GroupsData[]) => void
+  setTeachersData: (value: TeachersData[]) => void
 ) {
-  const apiLink = `${API_LINK}facultyId=${facultyId}&educationForm=${educationForm}`;
-  const apiUrl = await fetch(apiLink);
+  const apiUrl = await fetch(API_LINK);
   const responseData = await apiUrl.json();
-  const result = JSON.parse(responseData).map((element: RespondeGroupsData) => {
+  const result = JSON.parse(responseData).map((element: RespondeTeachersData) => {
       const prepareData = {
-          name: element.Name,
-          idGroup: element.IdGroup,
+        fio: element.FIO_teacher,
+        idTeacher: element.IdTeacher,
       };
       return prepareData;
   });
-
-  setGroupsData(result);
+  setTeachersData(result);
 }

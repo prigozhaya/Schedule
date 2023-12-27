@@ -1,8 +1,9 @@
 
-import { StyledLessonTypeIndicator, StyledCard, StyledLessonSection, StyledLessonTimeIn, StyledLessoninfo, StyledLessonName, StyledLessonSectionLector } from './styles';
-import { LessonCardProps } from './types';
+import { StyledLessonTypeIndicator, StyledCard, StyledLessonSection, StyledLessonTimeIn, StyledLessoninfo, StyledLessonName, StyledLessonSectionClassroom } from '../styles';
+import { StudentsLessonCardProps } from '../types';
 
-export default function LessonCard({ pair }: LessonCardProps) {
+
+export default function StudentsLessonCard({ pair }: StudentsLessonCardProps) {
 
   const {
     discipline,
@@ -22,11 +23,11 @@ export default function LessonCard({ pair }: LessonCardProps) {
         </StyledLessonSection>
         <StyledLessonSection>
           <StyledLessonName>{discipline}</StyledLessonName>
-          <StyledLessoninfo>{classroom}</StyledLessoninfo>
-        </StyledLessonSection>
-        <StyledLessonSectionLector>
           <StyledLessoninfo>{fioTeacher}</StyledLessoninfo>
-        </StyledLessonSectionLector>
+        </StyledLessonSection>
+        <StyledLessonSectionClassroom>
+          <StyledLessoninfo>{classroom}</StyledLessoninfo>
+        </StyledLessonSectionClassroom>
     </StyledCard>
   );
 }
